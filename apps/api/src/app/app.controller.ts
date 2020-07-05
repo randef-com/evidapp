@@ -1,15 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
-
-import { Message } from '@evidapp/api-interfaces';
-
-import { AppService } from './app.service';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor() {}
 
-  @Get('hello')
-  getData(): Message {
-    return this.appService.getData();
+  @UseGuards(AuthGuard('jwt'))
+  @Get()
+  getHello(): string {
+    return "Hello";
   }
 }

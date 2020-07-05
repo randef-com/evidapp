@@ -17,7 +17,12 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },
@@ -27,12 +32,14 @@
     },
     "evidapp-e2e": {
       "tags": [],
-      "implicitDependencies": ["evidapp"]
-    },
-    "api": {
-      "tags": []
+      "implicitDependencies": [
+        "evidapp"
+      ]
     },
     "api-interfaces": {
+      "tags": []
+    },
+    "api": {
       "tags": []
     }
   }
