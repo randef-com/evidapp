@@ -22,33 +22,27 @@ export class UsersService {
     return await this.userRepository.findOne({ email: userEmail });
   }
 
-  public async findById(id: number): Promise<User | null> {
+  public async findById(id: number): Promise<User> {
     try{
       return await this.userRepository.findOneOrFail(id);
     } catch (ex) {
       if (ex instanceof EntityNotFoundError) {
-        throw new NotFoundException();
+        throw new NotFoundException(`User with ID: ${id} doesn't exist.`);
       }
       throw ex;
     }
-
   }
 
   public async create(user: CreateUserDto): Promise<User> {
     return await this.userRepository.save(user);
   }
 
-  public async update(
-    id: number,
-    newValue: CreateUserDto,
-  ): Promise<User | null> {
-    const user = await this.userRepository.findOneOrFail(id);
-    if (!user.id) {
-      throw new NotFoundException("User does not exist");
-    }
-    await this.userRepository.update(id, newValue);
-    return await this.userRepository.findOne(id);
+  public async update(id: number, dto: CreateUserDto): Promise<User> {
+    const user = await this.findById(id);
+    const updated = Object.assign(user, dto);
+    return await this.userRepository.save(updated);
   }
+
 
   public async delete(id: number): Promise<DeleteResult> {
     return await this.userRepository.delete(id);

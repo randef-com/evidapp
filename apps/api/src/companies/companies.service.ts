@@ -11,39 +11,36 @@ import {EntityNotFoundError} from "typeorm/error/EntityNotFoundError";
 export class CompaniesService {
   constructor(
     @InjectRepository(CompaniesRepository)
-    private readonly companiesRepository: CompaniesRepository,
+    private readonly repository: CompaniesRepository,
   ) {
   }
 
   async findAll(filterDto: GetCompaniesFilterDto): Promise<Company[]> {
-    return this.companiesRepository.getAllFiltered(filterDto);
+    return this.repository.getAllFiltered(filterDto);
   }
 
   public async findById(id: number): Promise<Company> {
     try {
-      return await this.companiesRepository.findOneOrFail(id);
+      return await this.repository.findOneOrFail(id);
     } catch (ex) {
       if (ex instanceof EntityNotFoundError) {
-        throw new NotFoundException();
+        throw new NotFoundException(`Company with ID: ${id} doesn't exist.`);
       }
       throw ex;
     }
   }
 
   public async create(company: CreateCompanyDto): Promise<Company> {
-    return await this.companiesRepository.save(company);
+    return await this.repository.save(company);
   }
 
-  public async update(id: number, newValue: CreateCompanyDto): Promise<Company> {
-    const user = await this.companiesRepository.findOneOrFail(id);
-    if (!user.id) {
-      throw new NotFoundException(`Company with ID: ${id} has not been found`);
-    }
-    await this.companiesRepository.update(id, newValue);
-    return await this.companiesRepository.findOne(id);
+  public async update(id: number, dto: CreateCompanyDto): Promise<Company> {
+    const company = await this.findById(id);
+    const updated = Object.assign(company, dto)
+    return await this.repository.save(updated);
   }
 
   public async delete(id: number): Promise<DeleteResult> {
-    return await this.companiesRepository.delete(id);
+    return await this.repository.delete(id);
   }
 }

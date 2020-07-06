@@ -11,44 +11,36 @@ import {CreateJobDto} from "./dto/create-job.dto";
 export class JobsService {
   constructor(
     @InjectRepository(JobsRepository)
-    private readonly companiesRepository: JobsRepository,
+    private readonly repository: JobsRepository,
   ) {
   }
 
-  async findAll(
-    filterDto: GetJobsFilterDto
-  ): Promise<Job[]> {
-    return this.companiesRepository.getAllFiltered(filterDto);
+  async findAll(filterDto: GetJobsFilterDto): Promise<Job[]> {
+    return this.repository.getAllFiltered(filterDto);
   }
 
   public async findById(id: number): Promise<Job> {
     try {
-      return await this.companiesRepository.findOneOrFail(id);
+      return await this.repository.findOneOrFail(id);
     } catch (ex) {
       if (ex instanceof EntityNotFoundError) {
-        throw new NotFoundException();
+        throw new NotFoundException(`Job with ID: ${id} doesn't exist.`);
       }
       throw ex;
     }
   }
 
-  public async create(company: CreateJobDto): Promise<Job> {
-    return await this.companiesRepository.save(company);
+  public async create(job: CreateJobDto): Promise<Job> {
+    return await this.repository.save(job);
   }
 
-  public async update(
-    id: number,
-    newValue: CreateJobDto,
-  ): Promise<Job> {
-    const user = await this.companiesRepository.findOneOrFail(id);
-    if (!user.id) {
-      throw new NotFoundException();
-    }
-    await this.companiesRepository.update(id, newValue);
-    return await this.companiesRepository.findOne(id);
+  public async update(id: number, dto: CreateJobDto): Promise<Job> {
+    const job = await this.findById(id);
+    const updated = Object.assign(job, dto)
+    return await this.repository.save(updated);
   }
 
   public async delete(id: number): Promise<DeleteResult> {
-    return await this.companiesRepository.delete(id);
+    return await this.repository.delete(id);
   }
 }

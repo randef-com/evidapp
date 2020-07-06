@@ -7,6 +7,7 @@ import {CompaniesRepository} from "./companies.repository";
 @Module({
   imports: [TypeOrmModule.forFeature([CompaniesRepository])],
   providers: [CompaniesService],
-  controllers: [CompaniesController]
+  controllers: [CompaniesController],
+  exports: [CompaniesService]
 })
 export class CompaniesModule {}

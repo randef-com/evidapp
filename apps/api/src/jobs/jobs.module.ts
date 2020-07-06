@@ -7,6 +7,7 @@ import {JobsRepository} from "./jobs.repository";
 @Module({
   imports: [TypeOrmModule.forFeature([JobsRepository])],
   providers: [JobsService],
-  controllers: [JobsController]
+  controllers: [JobsController],
+  exports: [JobsService]
 })
 export class JobsModule {}
