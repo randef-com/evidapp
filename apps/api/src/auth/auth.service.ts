@@ -13,17 +13,8 @@ export class AuthService {
               private jwtService: JwtService) {
   }
 
-  async register(user: CreateUserDto) {
-    let status: IRegistrationStatus = {
-      success: true,
-      message: 'user register',
-    };
-    try {
-      await this.usersService.register(user);
-    } catch (err) {
-      status = {success: false, message: err};
-    }
-    return status;
+  async register(user: CreateUserDto): Promise<void> {
+    await this.usersService.register(user);
   }
 
   async login(user: User): Promise<IToken> {
