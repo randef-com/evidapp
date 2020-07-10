@@ -35,8 +35,9 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
         // Set the defaults
         this.countdown = 5;
         this.countdownMapping = {
-            '=1'   : '# second',
-            'other': '# seconds'
+            '=1'   : '# sekundu',
+            '=5'   : '# sekund',
+            'other': '# sekundy'
         };
     }
 
@@ -67,7 +68,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
                 () => {
                 },
                 () => {
-                    this._router.navigate(['sign-in']);
+                    // this._router.navigate(['sign-in']);
                 }
             );
     }
