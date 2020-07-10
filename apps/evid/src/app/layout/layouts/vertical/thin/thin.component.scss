@@ -1,0 +1,261 @@
+@import 'apps/evid/src/@evid/styles/evid';
+
+$evid-vertical-navigation-thin-width: 88;
+
+thin-layout {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+
+    > evid-vertical-navigation {
+
+        .evid-vertical-navigation-content-header {
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80px;
+                min-height: 80px;
+                max-height: 80px;
+
+                img {
+                    max-width: 32px;
+                }
+            }
+        }
+
+        // Thin appearance overrides
+        &.evid-vertical-navigation-appearance-thin {
+            width: #{$evid-vertical-navigation-thin-width}px;
+            min-width: #{$evid-vertical-navigation-thin-width}px;
+            max-width: #{$evid-vertical-navigation-thin-width}px;
+
+            // Left positioned
+            &.evid-vertical-navigation-position-left {
+
+                &.evid-vertical-navigation-mode-side {
+                    margin-left: -#{$evid-vertical-navigation-thin-width}px;
+                }
+
+                &.evid-vertical-navigation-opened {
+                    margin-left: 0;
+                }
+            }
+
+            // Right positioned
+            &.evid-vertical-navigation-position-right {
+
+                &.evid-vertical-navigation-mode-side {
+                    margin-right: -#{$evid-vertical-navigation-thin-width}px;
+                }
+
+                &.evid-vertical-navigation-opened {
+                    margin-right: 0;
+                }
+
+                .evid-vertical-navigation-aside-wrapper {
+                    left: auto;
+                    right: #{$evid-vertical-navigation-thin-width}px;
+                }
+            }
+
+            // Wrapper
+            .evid-vertical-navigation-wrapper {
+
+                // Content
+                .evid-vertical-navigation-content {
+
+                    > evid-vertical-navigation-aside-item,
+                    > evid-vertical-navigation-basic-item {
+                        flex-direction: column;
+                        justify-content: center;
+                        height: 64px;
+                        min-height: 64px;
+                        max-height: 64px;
+                        padding: 0 16px;
+
+                        .evid-vertical-navigation-item-wrapper {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            .evid-vertical-navigation-item {
+                                justify-content: center;
+                                padding: 12px;
+                                border-radius: 4px;
+
+                                .evid-vertical-navigation-item-icon {
+                                    margin: 0;
+                                }
+
+                                .evid-vertical-navigation-item-arrow,
+                                .evid-vertical-navigation-item-badge-content,
+                                .evid-vertical-navigation-item-title-wrapper {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+
+                    > evid-vertical-navigation-collapsable-item {
+                        display: none
+                    }
+
+                    > evid-vertical-navigation-group-item {
+
+                        > .evid-vertical-navigation-item-wrapper {
+                            display: none
+                        }
+                    }
+                }
+            }
+
+            // Aside wrapper
+            .evid-vertical-navigation-aside-wrapper {
+                left: #{$evid-vertical-navigation-thin-width}px;
+            }
+        }
+    }
+
+    > .wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-width: 0;
+
+        > .header {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            width: 100%;
+            height: 64px;
+            max-height: 64px;
+            min-height: 64px;
+            padding: 0 24px;
+            z-index: 49;
+
+            @include evid-breakpoint('lt-md') {
+                padding: 0 16px;
+            }
+
+            .navigation-toggle-button {
+                margin-right: 8px;
+            }
+
+            .spacer {
+                display: flex;
+                flex: 1 1 auto;
+                height: 1px;
+            }
+
+            search {
+                margin-right: 8px;
+            }
+
+            shortcuts {
+                margin-right: 8px;
+            }
+
+            messages {
+                margin-right: 8px;
+            }
+
+            notifications {
+                margin-right: 8px;
+            }
+        }
+
+        > .content {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+
+            > *:not(router-outlet) {
+                position: relative;
+                display: flex;
+                flex: 1 1 auto;
+            }
+        }
+
+        > .footer {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 56px;
+            max-height: 56px;
+            min-height: 56px;
+            padding: 0 24px;
+            z-index: 49;
+        }
+    }
+
+    &.fixed-header {
+
+        > .wrapper {
+
+            > .header {
+                position: sticky;
+                top: 0;
+            }
+        }
+    }
+
+    &.fixed-footer {
+
+        > .wrapper {
+
+            > .footer {
+                position: sticky;
+                bottom: 0;
+            }
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Theming
+// -----------------------------------------------------------------------------------------------------
+@include evid-theme {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $primary: map-get($theme, primary);
+    $is-dark: map-get($theme, is-dark);
+
+    thin-layout {
+
+        > evid-vertical-navigation {
+            @if ($is-dark) {
+                background: evid-color('cool-gray', 900);
+            } @else {
+                background: map-get($background, card);
+            }
+        }
+
+        > .wrapper {
+
+            > .header {
+                @if ($is-dark) {
+                    box-shadow: 0 1px 0 0 map-get($foreground, divider);
+                } @else {
+                    background: map-get($background, card);
+                    @include evid-elevation();
+                }
+            }
+
+            > .footer {
+                @if (not $is-dark) {
+                    background: map-get($background, card);
+                    @include evid-elevation();
+                }
+                box-shadow: 0 -1px 0 0 map-get($foreground, divider);
+                color: map-get($foreground, secondary-text);
+            }
+        }
+    }
+}

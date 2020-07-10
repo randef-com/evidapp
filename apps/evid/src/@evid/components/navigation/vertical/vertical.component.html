@@ -1,0 +1,105 @@
+<div class="evid-vertical-navigation-wrapper">
+
+    <!-- Header -->
+    <div class="evid-vertical-navigation-header">
+        <ng-content select="[EvidVerticalNavigationHeader]"></ng-content>
+    </div>
+
+    <!-- Content -->
+    <div class="evid-vertical-navigation-content"
+         evidScrollbar
+         [evidScrollbarOptions]="{wheelPropagation: inner, suppressScrollX: true}"
+         #navigationContent>
+
+        <!-- Content header -->
+        <div class="evid-vertical-navigation-content-header">
+            <ng-content select="[EvidVerticalNavigationContentHeader]"></ng-content>
+        </div>
+
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+                <!-- Aside -->
+                <evid-vertical-navigation-aside-item *ngIf="item.type === 'aside'"
+                                                    [item]="item"
+                                                    [name]="name"
+                                                    [activeItemId]="activeAsideItemId"
+                                                    [autoCollapse]="autoCollapse"
+                                                    [skipChildren]="true"
+                                                    (click)="toggleAside(item)"></evid-vertical-navigation-aside-item>
+
+                <!-- Basic -->
+                <evid-vertical-navigation-basic-item *ngIf="item.type === 'basic'"
+                                                    [item]="item"
+                                                    [name]="name"></evid-vertical-navigation-basic-item>
+
+                <!-- Collapsable -->
+                <evid-vertical-navigation-collapsable-item *ngIf="item.type === 'collapsable'"
+                                                          [item]="item"
+                                                          [name]="name"
+                                                          [autoCollapse]="autoCollapse"></evid-vertical-navigation-collapsable-item>
+
+                <!-- Divider -->
+                <evid-vertical-navigation-divider-item *ngIf="item.type === 'divider'"
+                                                      [item]="item"
+                                                      [name]="name"></evid-vertical-navigation-divider-item>
+
+                <!-- Group -->
+                <evid-vertical-navigation-group-item *ngIf="item.type === 'group'"
+                                                    [item]="item"
+                                                    [name]="name"
+                                                    [autoCollapse]="autoCollapse"></evid-vertical-navigation-group-item>
+
+                <!-- Spacer -->
+                <evid-vertical-navigation-spacer-item *ngIf="item.type === 'spacer'"
+                                                     [item]="item"
+                                                     [name]="name"></evid-vertical-navigation-spacer-item>
+
+            </ng-container>
+
+        </ng-container>
+
+        <!-- Content footer -->
+        <div class="evid-vertical-navigation-content-footer">
+            <ng-content select="[EvidVerticalNavigationContentFooter]"></ng-content>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="evid-vertical-navigation-footer">
+        <ng-content select="[EvidVerticalNavigationFooter]"></ng-content>
+    </div>
+
+</div>
+
+<!-- Aside -->
+<div class="evid-vertical-navigation-aside-wrapper"
+     *ngIf="activeAsideItemId"
+     evidScrollbar
+     [evidScrollbarOptions]="{wheelPropagation: false, suppressScrollX: true}"
+     [@fadeInLeft]="position === 'left'"
+     [@fadeInRight]="position === 'right'"
+     [@fadeOutLeft]="position === 'left'"
+     [@fadeOutRight]="position === 'right'">
+
+    <!-- Items -->
+    <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+
+        <!-- Skip the hidden items -->
+        <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+            <!-- Aside -->
+            <evid-vertical-navigation-aside-item *ngIf="item.type === 'aside' && item.id === activeAsideItemId"
+                                                [item]="item"
+                                                [name]="name"
+                                                [autoCollapse]="autoCollapse"></evid-vertical-navigation-aside-item>
+
+        </ng-container>
+
+    </ng-container>
+
+</div>

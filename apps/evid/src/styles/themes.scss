@@ -1,0 +1,67 @@
+// @formatter:off
+
+// -----------------------------------------------------------------------------------------------------
+// @ evid themes map. Do NOT rename the '$evid-themes' map name!!!
+//   This file meant to be imported more than once by @evid, do NOT put anything heavy here!
+//   The map contains Angular Material themes that will be generated for your app.
+//
+// @ Each value of the map is an Angular Material theme, generated and modified by using
+//   'evid-light-theme' and/or 'evid-dark-theme' functions which uses 'mat-light-theme' and
+//   'mat-dark-theme' functions respectively to generate the themes.
+//
+// @ 'evid-palette' values are coming from '$evid-color' map which can be found in
+//   '@evid/styles/utilities/_colors.scss'.
+// -----------------------------------------------------------------------------------------------------
+$evid-themes: (
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ User themes - DO NOT REMOVE or RENAME
+    //   These are main color themes for evid. You can modify the palette colors for your own needs and
+    //   likings.
+    // -----------------------------------------------------------------------------------------------------
+
+    // Dark theme - DO NOT REMOVE or RENAME
+    'evid-theme-dark': evid-dark-theme(
+        evid-palette('teal'),
+        evid-palette('pink', 500),
+        evid-palette('red', 400)
+    ),
+
+    // Light theme - DO NOT REMOVE or RENAME
+    'evid-theme-light': evid-light-theme(
+        evid-palette('indigo', 600),
+        evid-palette('cool-gray', 800),
+        evid-palette('red', 700)
+    ),
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Dark & Light themes - DO NOT REMOVE or RENAME
+    //   These are generic themes which are useful if you want to adjust the theming of certain container
+    //   or an element independently from the app's global theme. You can modify the palette colors for your
+    //   own needs and likings.
+    //
+    // @ Example: If you want to have a dark toolbar in your light themed app, adding '.theme-dark' class
+    //   to the toolbar will apply a dark theme to every element that stays inside it without needing any
+    //   extra work. Without the '.theme-dark' class, adding just a dark background color won't automatically
+    //   make the toolbar elements colored correctly, which will break the styling of the toolbar.
+    //
+    // @ Important note: '.theme-light' classes will always override '.theme-dark' classes because how CSS
+    //   works. Since 'theme-light' definition comes after the 'theme-dark' definition, CSS classes and
+    //   helpers will also be generated with that order which will cause that behavior. To overcome this
+    //   issue, never nest '.theme-light' and '.theme-dark' classes. Use them as siblings!
+    // -----------------------------------------------------------------------------------------------------
+
+    // Dark theme - DO NOT REMOVE or RENAME
+    'theme-dark': evid-dark-theme(
+        evid-palette('white'),
+        evid-palette('gray', 800),
+        evid-palette('red', 800)
+    ),
+
+    // Light theme - DO NOT REMOVE or RENAME
+    'theme-light': evid-light-theme(
+        evid-palette('black'),
+        evid-palette('gray', 800),
+        evid-palette('red', 800)
+    )
+);

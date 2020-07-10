@@ -27,19 +27,19 @@
     }
   },
   "projects": {
-    "evidapp": {
-      "tags": []
-    },
     "evidapp-e2e": {
       "tags": [],
       "implicitDependencies": [
-        "evidapp"
+        "evid"
       ]
     },
     "api-interfaces": {
       "tags": []
     },
     "api": {
+      "tags": []
+    },
+    "evid": {
       "tags": []
     }
   }

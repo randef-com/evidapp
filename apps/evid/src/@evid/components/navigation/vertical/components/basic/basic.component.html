@@ -1,0 +1,95 @@
+<!-- Item wrapper -->
+<div class="evid-vertical-navigation-item-wrapper"
+     [class.evid-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+     [ngClass]="item.classes">
+
+    <!-- Item with an internal link -->
+    <a class="evid-vertical-navigation-item"
+       *ngIf="item.link && !item.externalLink && !item.function && !item.disabled"
+       [ngClass]="{'evid-vertical-navigation-item-active-forced': item.active}"
+       [routerLink]="[item.link]"
+       [routerLinkActive]="'evid-vertical-navigation-item-active'"
+       [routerLinkActiveOptions]="{exact: item.exactMatch || false}">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+
+    <!-- Item with an external link -->
+    <a class="evid-vertical-navigation-item"
+       *ngIf="item.link && item.externalLink && !item.function && !item.disabled"
+       [href]="item.link">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+
+    <!-- Item with a function -->
+    <div class="evid-vertical-navigation-item"
+         *ngIf="!item.link && item.function && !item.disabled"
+         [ngClass]="{'evid-vertical-navigation-item-active-forced': item.active}"
+         (click)="item.function(item)">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+
+    <!-- Item with an internal link and function -->
+    <a class="evid-vertical-navigation-item"
+       *ngIf="item.link && !item.externalLink && item.function && !item.disabled"
+       [ngClass]="{'evid-vertical-navigation-item-active-forced': item.active}"
+       [routerLink]="[item.link]"
+       [routerLinkActive]="'evid-vertical-navigation-item-active'"
+       [routerLinkActiveOptions]="{exact: item.exactMatch || false}"
+       (click)="item.function(item)">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+
+    <!-- Item with an external link and function -->
+    <a class="evid-vertical-navigation-item"
+       *ngIf="item.link && item.externalLink && item.function && !item.disabled"
+       [href]="item.link"
+       (click)="item.function(item)">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+
+    <!-- Item with a no link and no function -->
+    <div class="evid-vertical-navigation-item"
+         *ngIf="!item.link && !item.function && !item.disabled"
+         [ngClass]="{'evid-vertical-navigation-item-active-forced': item.active}">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+
+    <!-- Item is disabled -->
+    <div class="evid-vertical-navigation-item evid-vertical-navigation-item-disabled"
+         *ngIf="item.disabled">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+
+</div>
+
+<!-- Item template -->
+<ng-template #itemTemplate>
+
+    <!-- Icon -->
+    <mat-icon class="evid-vertical-navigation-item-icon"
+              [ngClass]="item.iconClasses"
+              *ngIf="item.icon"
+              [svgIcon]="item.icon"></mat-icon>
+
+    <!-- Title & Subtitle -->
+    <div class="evid-vertical-navigation-item-title-wrapper">
+        <div class="evid-vertical-navigation-item-title">{{item.title}}</div>
+        <div class="evid-vertical-navigation-item-subtitle"
+             *ngIf="item.subtitle">
+            {{item.subtitle}}
+        </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="evid-vertical-navigation-item-badge"
+         *ngIf="item.badge">
+        <div class="evid-vertical-navigation-item-badge-content"
+             [ngClass]="[(item.badge.style != undefined ? 'evid-vertical-navigation-item-badge-style-' + item.badge.style : ''),
+                             (item.badge.background != undefined && !item.badge.background.startsWith('#') ? item.badge.background : ''),
+                             (item.badge.color != undefined && !item.badge.color.startsWith('#') ? item.badge.color : '')]"
+             [ngStyle]="{'background-color': item.badge.background, 'color': item.badge.color}">
+            {{item.badge.title}}
+        </div>
+    </div>
+
+</ng-template>

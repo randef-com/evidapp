@@ -1,0 +1,29 @@
+<!-- Flippable card -->
+<ng-container *ngIf="flippable">
+
+    <!-- Front -->
+    <div class="evid-card-front">
+        <ng-content select="[evidCardFront]"></ng-content>
+    </div>
+
+    <!-- Back -->
+    <div class="evid-card-back">
+        <ng-content select="[evidCardBack]"></ng-content>
+    </div>
+
+</ng-container>
+
+<!-- Normal card -->
+<ng-container *ngIf="!flippable">
+
+    <!-- Content -->
+    <ng-content></ng-content>
+
+    <!-- Expansion -->
+    <div class="evid-card-expansion"
+         *ngIf="expanded"
+         [@expandCollapse]>
+        <ng-content select="[evidCardExpansion]"></ng-content>
+    </div>
+
+</ng-container>

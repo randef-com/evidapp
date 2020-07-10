@@ -1,0 +1,323 @@
+@import 'apps/evid/src/@evid/styles/evid';
+
+$evid-vertical-navigation-width: 280;
+$evid-vertical-navigation-dense-width: 72;
+
+dense-layout {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+
+    > evid-vertical-navigation {
+
+        .evid-vertical-navigation-content-header {
+
+            .logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80px;
+                min-height: 80px;
+                max-height: 80px;
+
+                img {
+                    max-width: 32px;
+                }
+            }
+        }
+
+        // Dense appearance overrides
+        &.evid-vertical-navigation-appearance-dense {
+
+            &:not(.evid-vertical-navigation-mode-over) {
+                width: #{$evid-vertical-navigation-dense-width}px;
+                min-width: #{$evid-vertical-navigation-dense-width}px;
+                max-width: #{$evid-vertical-navigation-dense-width}px;
+
+                // Left positioned
+                &.evid-vertical-navigation-position-left {
+
+                    // Side mode
+                    &.evid-vertical-navigation-mode-side {
+                        margin-left: -#{$evid-vertical-navigation-dense-width}px;
+                    }
+
+                    // Opened
+                    &.evid-vertical-navigation-opened {
+                        margin-left: 0;
+                    }
+                }
+
+                // Right positioned
+                &.evid-vertical-navigation-position-right {
+
+                    // Side mode
+                    &.evid-vertical-navigation-mode-side {
+                        margin-right: -#{$evid-vertical-navigation-dense-width}px;
+                    }
+
+                    // Opened
+                    &.evid-vertical-navigation-opened {
+                        margin-right: 0;
+                    }
+
+                    // Aside wrapper
+                    .evid-vertical-navigation-aside-wrapper {
+                        left: auto;
+                        right: #{$evid-vertical-navigation-dense-width}px;
+                    }
+
+                    &.evid-vertical-navigation-hover {
+
+                        .evid-vertical-navigation-aside-wrapper {
+                            left: auto;
+                            right: #{$evid-vertical-navigation-width}px;
+                        }
+                    }
+                }
+            }
+
+            // Wrapper
+            .evid-vertical-navigation-wrapper {
+
+                // Content
+                .evid-vertical-navigation-content {
+
+                    evid-vertical-navigation-aside-item,
+                    evid-vertical-navigation-basic-item,
+                    evid-vertical-navigation-collapsable-item,
+                    evid-vertical-navigation-group-item {
+
+                        .evid-vertical-navigation-item {
+                            width: #{$evid-vertical-navigation-width}px;
+                            min-width: #{$evid-vertical-navigation-width}px;
+                            max-width: #{$evid-vertical-navigation-width}px;
+
+                            .evid-vertical-navigation-item-arrow,
+                            .evid-vertical-navigation-item-badge,
+                            .evid-vertical-navigation-item-title-wrapper {
+                                transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+                            }
+                        }
+                    }
+
+                    evid-vertical-navigation-group-item {
+
+                        &:first-of-type {
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+
+            &:not(.evid-vertical-navigation-hover):not(.evid-vertical-navigation-mode-over) {
+
+                // Wrapper
+                .evid-vertical-navigation-wrapper {
+
+                    // Content
+                    .evid-vertical-navigation-content {
+
+                        .evid-vertical-navigation-item {
+                            padding: 12px 24px;
+
+                            .evid-vertical-navigation-item-arrow,
+                            .evid-vertical-navigation-item-badge,
+                            .evid-vertical-navigation-item-title-wrapper {
+                                white-space: nowrap;
+                            }
+
+                            .evid-vertical-navigation-item-arrow,
+                            .evid-vertical-navigation-item-badge-content,
+                            .evid-vertical-navigation-item-title-wrapper {
+                                opacity: 0;
+                            }
+                        }
+
+                        evid-vertical-navigation-collapsable-item {
+
+                            .evid-vertical-navigation-item-children {
+                                display: none;
+                            }
+                        }
+
+                        evid-vertical-navigation-group-item {
+
+                            > .evid-vertical-navigation-item-wrapper {
+
+                                .evid-vertical-navigation-item {
+
+                                    &:before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 20px;
+                                        width: 23px;
+                                        border-top-width: 2px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Aside wrapper
+            .evid-vertical-navigation-aside-wrapper {
+                left: #{$evid-vertical-navigation-dense-width}px;
+            }
+
+            // Hover
+            &.evid-vertical-navigation-hover {
+
+                .evid-vertical-navigation-wrapper {
+                    width: #{$evid-vertical-navigation-width}px;
+                }
+
+                .evid-vertical-navigation-aside-wrapper {
+                    left: #{$evid-vertical-navigation-width}px;
+                }
+            }
+        }
+    }
+
+    > .wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-width: 0;
+
+        > .header {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            width: 100%;
+            height: 64px;
+            max-height: 64px;
+            min-height: 64px;
+            padding: 0 24px;
+            z-index: 49;
+
+            @include evid-breakpoint('lt-md') {
+                padding: 0 16px;
+            }
+
+            .navigation-toggle-button {
+                margin-right: 8px;
+            }
+
+            .navigation-appearance-toggle-button {
+                margin-right: 8px;
+
+                @include evid-breakpoint('lt-md') {
+                    display: none !important;
+                }
+            }
+
+            .spacer {
+                display: flex;
+                flex: 1 1 auto;
+                height: 1px;
+            }
+
+            search {
+                margin-right: 8px;
+            }
+
+            shortcuts {
+                margin-right: 8px;
+            }
+
+            messages {
+                margin-right: 8px;
+            }
+
+            notifications {
+                margin-right: 8px;
+            }
+        }
+
+        > .content {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+
+            > *:not(router-outlet) {
+                position: relative;
+                display: flex;
+                flex: 1 1 auto;
+            }
+        }
+
+        > .footer {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 56px;
+            max-height: 56px;
+            min-height: 56px;
+            padding: 0 24px;
+            z-index: 49;
+        }
+    }
+
+    &.fixed-header {
+
+        > .wrapper {
+
+            > .header {
+                position: sticky;
+                top: 0;
+            }
+        }
+    }
+
+    &.fixed-footer {
+
+        > .wrapper {
+
+            > .footer {
+                position: sticky;
+                bottom: 0;
+            }
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Theming
+// -----------------------------------------------------------------------------------------------------
+@include evid-theme {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $primary: map-get($theme, primary);
+    $is-dark: map-get($theme, is-dark);
+
+    dense-layout {
+
+        > .wrapper {
+
+            > .header {
+                @if ($is-dark) {
+                    box-shadow: 0 1px 0 0 map-get($foreground, divider);
+                } @else {
+                    background: map-get($background, card);
+                    @include evid-elevation();
+                }
+            }
+
+            > .footer {
+                @if (not $is-dark) {
+                    background: map-get($background, card);
+                    @include evid-elevation();
+                }
+                box-shadow: 0 -1px 0 0 map-get($foreground, divider);
+                color: map-get($foreground, secondary-text);
+            }
+        }
+    }
+}

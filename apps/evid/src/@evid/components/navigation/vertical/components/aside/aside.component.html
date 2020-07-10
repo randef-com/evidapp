@@ -1,0 +1,85 @@
+<div class="evid-vertical-navigation-item-wrapper"
+     [class.evid-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+     [ngClass]="item.classes">
+
+    <div class="evid-vertical-navigation-item"
+         [ngClass]="{'evid-vertical-navigation-item-active': active,
+                     'evid-vertical-navigation-item-disabled': item.disabled,
+                     'evid-vertical-navigation-item-active-forced': item.active}">
+
+        <!-- Icon -->
+        <mat-icon class="evid-vertical-navigation-item-icon"
+                  [ngClass]="item.iconClasses"
+                  *ngIf="item.icon"
+                  [svgIcon]="item.icon"></mat-icon>
+
+        <!-- Title & Subtitle -->
+        <div class="evid-vertical-navigation-item-title-wrapper">
+            <div class="evid-vertical-navigation-item-title">{{item.title}}</div>
+            <div class="evid-vertical-navigation-item-subtitle"
+                 *ngIf="item.subtitle">
+                {{item.subtitle}}
+            </div>
+
+        </div>
+
+        <!-- Badge -->
+        <div class="evid-vertical-navigation-item-badge"
+             *ngIf="item.badge">
+
+            <div class="evid-vertical-navigation-item-badge-content"
+                 [ngClass]="[(item.badge.style != undefined ? 'evid-vertical-navigation-item-badge-style-' + item.badge.style : ''),
+                             (item.badge.background != undefined && !item.badge.background.startsWith('#') ? item.badge.background : ''),
+                             (item.badge.color != undefined && !item.badge.color.startsWith('#') ? item.badge.color : '')]"
+                 [ngStyle]="{'background-color': item.badge.background, 'color': item.badge.color}">
+                {{item.badge.title}}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<ng-container *ngIf="!skipChildren">
+
+    <div class="evid-vertical-navigation-item-children">
+
+        <ng-container *ngFor="let item of item.children; trackBy: trackByFn">
+
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+                <!-- Basic -->
+                <evid-vertical-navigation-basic-item *ngIf="item.type === 'basic'"
+                                                     [item]="item"
+                                                     [name]="name"></evid-vertical-navigation-basic-item>
+
+                <!-- Collapsable -->
+                <evid-vertical-navigation-collapsable-item *ngIf="item.type === 'collapsable'"
+                                                           [item]="item"
+                                                           [name]="name"
+                                                           [autoCollapse]="autoCollapse"></evid-vertical-navigation-collapsable-item>
+
+                <!-- Divider -->
+                <evid-vertical-navigation-divider-item *ngIf="item.type === 'divider'"
+                                                       [item]="item"
+                                                       [name]="name"></evid-vertical-navigation-divider-item>
+
+                <!-- Group -->
+                <evid-vertical-navigation-group-item *ngIf="item.type === 'group'"
+                                                     [item]="item"
+                                                     [name]="name"></evid-vertical-navigation-group-item>
+
+                <!-- Spacer -->
+                <evid-vertical-navigation-spacer-item *ngIf="item.type === 'spacer'"
+                                                      [item]="item"
+                                                      [name]="name"></evid-vertical-navigation-spacer-item>
+
+            </ng-container>
+
+        </ng-container>
+
+    </div>
+
+</ng-container>

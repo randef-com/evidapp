@@ -1,0 +1,70 @@
+<div class="evid-message-container"
+     *ngIf="!dismissed"
+     [@fadeIn]="dismissed === null ? false : !dismissed"
+     [@fadeOut]="dismissed === null ? false : !dismissed">
+
+    <!-- Icon -->
+    <div class="evid-message-icon"
+         *ngIf="showIcon">
+
+        <!-- Custom icon -->
+        <div class="evid-message-custom-icon">
+            <ng-content select="[EvidMessageIcon]"></ng-content>
+        </div>
+
+        <!-- Default icons -->
+        <div class="evid-message-default-icon">
+
+            <mat-icon *ngIf="type === 'primary'"
+                      [svgIcon]="'check_circle'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'accent'"
+                      [svgIcon]="'check_circle'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'warn'"
+                      [svgIcon]="'warning'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'basic'"
+                      [svgIcon]="'check_circle'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'info'"
+                      [svgIcon]="'info'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'success'"
+                      [svgIcon]="'check_circle'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'warning'"
+                      [svgIcon]="'warning'"></mat-icon>
+
+            <mat-icon *ngIf="type === 'error'"
+                      [svgIcon]="'error'"></mat-icon>
+
+        </div>
+
+    </div>
+
+    <!-- Content -->
+    <div class="evid-message-content">
+
+        <div class="evid-message-title">
+            <p>
+                <ng-content select="[EvidMessageTitle]"></ng-content>
+            </p>
+        </div>
+
+        <div class="evid-message-message">
+            <p>
+                <ng-content></ng-content>
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Dismiss button -->
+    <button class="evid-message-dismiss-button"
+            mat-icon-button
+            (click)="dismiss()">
+        <mat-icon [svgIcon]="'close'"></mat-icon>
+    </button>
+
+</div>

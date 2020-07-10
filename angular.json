@@ -1,108 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "evidapp": {
-      "projectType": "application",
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "apps/evidapp",
-      "sourceRoot": "apps/evidapp/src",
-      "prefix": "evidapp",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/evidapp",
-            "index": "apps/evidapp/src/index.html",
-            "main": "apps/evidapp/src/main.ts",
-            "polyfills": "apps/evidapp/src/polyfills.ts",
-            "tsConfig": "apps/evidapp/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/evidapp/src/favicon.ico",
-              "apps/evidapp/src/assets"
-            ],
-            "styles": [
-              "apps/evidapp/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/evidapp/src/environments/environment.ts",
-                  "with": "apps/evidapp/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "evidapp:build",
-            "proxyConfig": "apps/evidapp/proxy.conf.json"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "evidapp:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "evidapp:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/evidapp/tsconfig.app.json",
-              "apps/evidapp/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/evidapp/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/evidapp/jest.config.js",
-            "tsConfig": "apps/evidapp/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/evidapp/src/test-setup.ts"
-          }
-        }
-      }
-    },
     "evidapp-e2e": {
       "root": "apps/evidapp-e2e",
       "sourceRoot": "apps/evidapp-e2e/src",
@@ -113,11 +11,11 @@
           "options": {
             "cypressConfig": "apps/evidapp-e2e/cypress.json",
             "tsConfig": "apps/evidapp-e2e/tsconfig.e2e.json",
-            "devServerTarget": "evidapp:serve"
+            "devServerTarget": "evid:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "evidapp:serve:production"
+              "devServerTarget": "evid:serve:production"
             }
           }
         },
@@ -177,8 +75,7 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-            ]
+            "assets": []
           },
           "configurations": {
             "production": {
@@ -222,6 +119,117 @@
           }
         }
       }
+    },
+    "evid": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/evid",
+      "sourceRoot": "apps/evid/src",
+      "prefix": "evidapp",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/evid",
+            "index": "apps/evid/src/index.html",
+            "main": "apps/evid/src/main.ts",
+            "polyfills": "apps/evid/src/polyfills.ts",
+            "tsConfig": "apps/evid/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/evid/src/favicon-16x16.png",
+              "apps/evid/src/favicon-32x32.png",
+              "apps/evid/src/assets"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "apps/evid/src/@evid/styles"
+              ]
+            },
+            "styles": [
+              "apps/evid/src/styles/vendors.scss",
+              "apps/evid/src/@evid/styles/main.scss",
+              "apps/evid/src/styles/styles.scss",
+              "apps/evid/src/styles/tailwind.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/evid/src/environments/environment.ts",
+                  "with": "apps/evid/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "evid:build",
+            "proxyConfig": "apps/evid/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "evid:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "evid:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/evid/tsconfig.app.json",
+              "apps/evid/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/evid/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/evid/jest.config.js",
+            "tsConfig": "apps/evid/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/evid/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -236,5 +244,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "evidapp"
+  "defaultProject": "evid"
 }

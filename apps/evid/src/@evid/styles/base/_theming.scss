@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Apply Angular Material theme and generate evid color classes for the theme
+// -----------------------------------------------------------------------------------------------------
+@include evid-theme {
+
+    // Generate Angular Material theme
+    @include angular-material-theme($theme);
+
+    // Generate evid color classes for the theme
+    @include evid-color-classes(
+            (
+                primary: map-get($theme, primary),
+                accent: map-get($theme, accent),
+                warn: map-get($theme, warn)
+            )
+    );
+}
