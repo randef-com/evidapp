@@ -13,12 +13,7 @@
                 </div>
 
                 <!-- Title -->
-                <div class="title">Přihlásit se</div>
-                <div class="subtitle">
-                    <span>Don't have an account?</span>
-                    <a class="link"
-                       [routerLink]="['/sign-up']">Sign up</a>
-                </div>
+                <div class="title">Přihlášení</div>
 
                 <!-- Message -->
                 <evid-message *ngIf="message"
@@ -34,7 +29,7 @@
 
                     <!-- Email field -->
                     <mat-form-field>
-                        <mat-label>Email address</mat-label>
+                        <mat-label>Email</mat-label>
                         <input id="email"
                                matInput
                                [formControlName]="'email'">
@@ -42,7 +37,7 @@
 
                     <!-- Password field -->
                     <mat-form-field>
-                        <mat-label>Password</mat-label>
+                        <mat-label>Heslo</mat-label>
                         <input id="password"
                                matInput
                                type="password"
@@ -64,11 +59,11 @@
                         <div class="remember-me">
                             <mat-checkbox [color]="'primary'"
                                           [formControlName]="'rememberMe'">
-                                Remember me
+                                Pamatovat si mě
                             </mat-checkbox>
                         </div>
                         <a class="link"
-                           [routerLink]="['/forgot-password']">Forgot password?</a>
+                           [routerLink]="['/forgot-password']">Zapomněli jste heslo?</a>
                     </div>
 
                     <!-- Submit button -->
@@ -79,33 +74,12 @@
                             [disabled]="signInForm.disabled"
                             (click)="signIn()">
                         <span *ngIf="!signInForm.disabled">
-                            Sign in
+                            Přihlásit se
                         </span>
                         <mat-progress-spinner *ngIf="signInForm.disabled"
                                               [diameter]="24"
                                               [mode]="'indeterminate'"></mat-progress-spinner>
                     </button>
-
-                    <!-- Single sign-on -->
-                    <div class="sso">
-                        <div class="separator">
-                            Or continue with
-                        </div>
-                        <div class="buttons">
-                            <button class="sso-button"
-                                    mat-stroked-button>
-                                <mat-icon [svgIcon]="'feather:facebook'"></mat-icon>
-                            </button>
-                            <button class="sso-button"
-                                    mat-stroked-button>
-                                <mat-icon [svgIcon]="'feather:twitter'"></mat-icon>
-                            </button>
-                            <button class="sso-button"
-                                    mat-stroked-button>
-                                <mat-icon [svgIcon]="'feather:github'"></mat-icon>
-                            </button>
-                        </div>
-                    </div>
 
                 </form>
 
@@ -128,17 +102,10 @@
 
             <div class="content">
                 <div class="title">
-                    <span>Well-crafted,</span>
-                    <span>Coded with attention,</span>
-                    <span>Build with passion.</span>
+                    <span>Sem dame</span>
+                    <span>nejakou grafiku,</span>
+                    <span>nebo hezkou fotku</span>
                 </div>
-                <div class="description">
-                    Evid helps developers to build organized and well-coded admin dashboards full of beautiful and feature rich modules.
-                </div>
-                <button class="learn-more-button"
-                        mat-stroked-button>
-                    Learn more
-                </button>
             </div>
 
         </div>

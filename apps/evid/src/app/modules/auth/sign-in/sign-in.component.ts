@@ -47,8 +47,8 @@ export class AuthSignInComponent implements OnInit
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['watkins.andrew@company.com'],
-            password  : ['admin'],
+            email     : [''],
+            password  : [''],
             rememberMe: ['']
         });
     }
@@ -65,7 +65,6 @@ export class AuthSignInComponent implements OnInit
         // Disable the form
         this.signInForm.disable();
 
-        // Hide the message
         this.message = null;
 
         // Get the credentials
