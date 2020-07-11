@@ -2,7 +2,7 @@ import { Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation } from '@a
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {EvidNavigationService} from "../../../../../@evid/components/navigation/navigation.service";
+import {EvidNavigationService} from "../../../../../@evid/components/navigation";
 import {EvidMediaWatcherService} from "../../../../../@evid/services/media-watcher";
 
 @Component({

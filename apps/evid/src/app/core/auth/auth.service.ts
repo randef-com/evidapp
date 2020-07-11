@@ -39,7 +39,6 @@ export class AuthService
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                console.log(response);
                 this.accessToken = response.access_token;
 
                 // Set the authenticated flag to true
@@ -118,6 +117,8 @@ export class AuthService
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        return this.signInUsingToken();
+       // TODO Refresh
+        // return this.signInUsingToken();
+        return of(false);
     }
 }

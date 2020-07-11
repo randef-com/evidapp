@@ -6,9 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {ModernLayoutComponent} from "./modern.component";
-import {EvidNavigationModule} from "../../../../../@evid/components/navigation/navigation.module";
-import {MessagesModule} from "../../../common/messages/messages.module";
-import {NotificationsModule} from "../../../common/notifications/notifications.module";
+import {EvidNavigationModule} from "../../../../../@evid/components/navigation";
 import {SearchModule} from "../../../common/search/search.module";
 import {ShortcutsModule} from "../../../common/shortcuts/shortcuts.module";
 import {SharedModule} from "../../../../shared/shared.module";
@@ -26,8 +24,6 @@ import {UserModule} from "../../../common/user/user.module";
         MatIconModule,
         MatMenuModule,
         EvidNavigationModule,
-        MessagesModule,
-        NotificationsModule,
         SearchModule,
         ShortcutsModule,
         UserModule,

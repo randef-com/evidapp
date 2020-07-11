@@ -54,6 +54,7 @@ export class UserComponent implements OnInit, OnDestroy
     @Input()
     set user(value: User)
     {
+      console.log(value);
         // Save the user
         this._user = value;
 
