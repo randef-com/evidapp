@@ -119,6 +119,7 @@ export class AuthService
         // If the access token exists and it didn't expire, sign in using it
        // TODO Refresh
         // return this.signInUsingToken();
-        return of(false);
+
+        return of(true);
     }
 }

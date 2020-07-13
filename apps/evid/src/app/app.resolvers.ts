@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import {forkJoin, Observable, of} from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
 import {Shortcut} from "./layout/common/shortcuts/shortcuts.types";
 import {EvidNavigationItem} from "../@evid/components/navigation";
 
@@ -50,32 +49,39 @@ export class InitialDataResolver implements Resolve<any>
             }
         ]},
         {
-          id      : 'applications',
-          title   : 'Apps',
-          type    : 'group',
-          icon    : 'heroicons_outline:qrcode',
+          id: 'employee-management',
+          title: 'Správa zaměstnanců',
+          type: 'group',
+          icon: 'heroicons_outline:user-group',
           children: [
             {
-              id      : 'applications.calendar',
-              title   : 'Calendar',
-              subtitle: '3 upcoming events',
+              id   : 'employee-management.jobs',
+              title: 'Pracovní pozice',
+              type : 'basic',
+              icon : 'heroicons_outline:briefcase',
+              link : '/employee-management/jobs'
+            }
+          ]
+        },
+        {
+          id      : 'applications',
+          title   : 'Výkazy',
+          type    : 'group',
+          icon    : 'heroicons_outline:book-open',
+          children: [
+            {
+              id      : 'applications.employee-export',
+              title   : 'Výkaz zaměstnance',
               type    : 'basic',
-              icon    : 'heroicons_outline:calendar',
+              icon    : 'heroicons_outline:briefcase',
               link    : '/apps/calendar'
             },
             {
-              id   : 'applications.contacts',
-              title: 'Contacts',
-              type : 'basic',
-              icon : 'heroicons_outline:user-group',
-              link : '/apps/contacts'
-            },
-            {
-              id   : 'applications.tasks',
-              title: 'Tasks',
-              type : 'basic',
-              icon : 'heroicons_outline:check-circle',
-              link : '/apps/tasks'
+              id      : 'applications.variable-export',
+              title   : 'Výkaz směn',
+              type    : 'basic',
+              icon    : 'heroicons_outline:calendar',
+              link    : '/apps/calendar'
             }
           ]
         },];

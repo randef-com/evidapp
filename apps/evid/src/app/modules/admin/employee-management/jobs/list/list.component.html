@@ -1,0 +1,131 @@
+<div class="content-layout right-sidebar-fullheight-basic-inner-scroll">
+
+  <mat-drawer-container (backdropClick)="onBackdropClicked()">
+
+    <!-- Drawer -->
+    <mat-drawer [mode]="drawerMode"
+                [opened]="false"
+                [position]="'end'"
+                [disableClose]="true"
+                #matDrawer>
+
+      <router-outlet></router-outlet>
+
+    </mat-drawer>
+
+    <mat-drawer-content>
+
+      <!-- Main -->
+      <div class="main">
+
+        <!-- Header -->
+        <div class="header">
+
+          <!-- Title -->
+          <div class="title">
+
+            <h1>Pracovní pozice</h1>
+
+            <div class="jobs-count">
+              <ng-container *ngIf="jobsCount > 0">
+                {{jobsCount}}
+              </ng-container>
+              {{jobsCount | i18nPlural: {
+              '=0': 'Žádné pracovní pozice',
+              '=1': 'pracovní pozice',
+              '=2': 'pracovní pozice',
+              '=3': 'pracovní pozice',
+              '=4': 'pracovní pozice',
+              'other': 'pracovních pozic'
+            } }}
+            </div>
+
+          </div>
+
+          <!-- Main actions -->
+          <div class="main-actions">
+
+            <!-- Search -->
+            <div class="search">
+
+              <mat-form-field class="evid-mat-dense evid-mat-no-subscript">
+                <mat-icon matPrefix
+                          [svgIcon]="'search'"></mat-icon>
+                <input matInput
+                       [formControl]="searchInputControl"
+                       [autocomplete]="'off'"
+                       [placeholder]="'Hledat'">
+              </mat-form-field>
+
+            </div>
+
+            <!-- Add job button -->
+            <button class="add-job"
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="createJob()">
+              <mat-icon [svgIcon]="'add'"></mat-icon>
+              Přidat
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="jobs-list">
+
+          <ng-container *ngIf="jobsCount > 0; else noJobs">
+
+            <!-- Table -->
+            <table mat-table
+                   [dataSource]="jobs$"
+                   [trackBy]="trackByFn">
+
+              <!-- Name -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell
+                    *matHeaderCellDef>
+                  Název
+                </th>
+                <td mat-cell
+                    *matCellDef="let job">
+                  <div class="name-content">
+<!--                                        <span class="avatar">-->
+<!--                                            <img *ngIf="job.avatar"-->
+<!--                                                 [src]="job.avatar">-->
+<!--                                            <span *ngIf="!job.avatar">-->
+<!--                                                {{job.name.charAt(0)}}-->
+<!--                                            </span>-->
+<!--                                        </span>-->
+                    <span class="name">{{job.name}}</span>
+                  </div>
+                </td>
+              </ng-container>
+
+
+
+              <tr mat-header-row
+                  *matHeaderRowDef="jobsTableColumns"></tr>
+              <tr class="job-row"
+                  [ngClass]="{'selected': selectedJob && selectedJob.id === row.id}"
+                  mat-row
+                  *matRowDef="let row; columns: jobsTableColumns;"
+                  (click)="goToJob(row.id)"></tr>
+
+            </table>
+
+          </ng-container>
+
+          <ng-template #noJobs>
+            <div class="no-jobs">Žádné pracovní pozice neodpovídají vašemu vyhledávání</div>
+          </ng-template>
+
+        </div>
+
+      </div>
+
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+
+</div>

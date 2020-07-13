@@ -1,0 +1,81 @@
+<form [formGroup]="jobForm"
+      [ngClass]="{'edit-mode': editMode}">
+
+    <!-- Actions -->
+    <div class="actions">
+
+        <!-- Edit button -->
+        <button mat-icon-button
+                *ngIf="!editMode"
+                [matMenuTriggerFor]="actionsMenu">
+            <mat-icon [svgIcon]="'more_vert'"></mat-icon>
+        </button>
+        <mat-menu #actionsMenu="matMenu">
+            <button mat-menu-item
+                    *ngIf="!editMode"
+                    (click)="toggleEditMode(true)">
+                <mat-icon [svgIcon]="'edit'"></mat-icon>
+                <span>Edit job</span>
+            </button>
+        </mat-menu>
+
+        <!-- Cancel button -->
+        <button class="cancel-button"
+                mat-icon-button
+                *ngIf="editMode"
+                [matTooltip]="'Cancel'"
+                (click)="toggleEditMode(false)">
+            <mat-icon [svgIcon]="'cancel'"></mat-icon>
+        </button>
+
+        <!-- Save button -->
+        <button mat-icon-button
+                *ngIf="editMode"
+                [disabled]="jobForm.invalid"
+                [matTooltip]="'Save'"
+                (click)="updateJob()">
+            <mat-icon [svgIcon]="'save'"></mat-icon>
+        </button>
+
+        <!-- Delete button -->
+        <button mat-icon-button
+                *ngIf="editMode"
+                [matTooltip]="'Delete'"
+                (click)="deleteJob()">
+            <mat-icon [svgIcon]="'delete'"></mat-icon>
+        </button>
+
+        <!-- Close button -->
+        <button mat-icon-button
+                *ngIf="!editMode"
+                [matTooltip]="'Close'"
+                [routerLink]="['../']">
+            <mat-icon [svgIcon]="'close'"></mat-icon>
+        </button>
+
+    </div>
+
+    <!-- Avatar and Name -->
+    <div class="avatar-and-name">
+        <!-- View -->
+        <div class="view"
+             *ngIf="job.name && !editMode">
+            <div class="name">{{job.name}}</div>
+        </div>
+
+        <!-- Edit -->
+        <div class="edit"
+             *ngIf="editMode">
+
+            <mat-form-field class="name edit evid-mat-no-subscript">
+                <input matInput
+                       [formControlName]="'name'"
+                       [placeholder]="'Name'"
+                       [spellcheck]="false">
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+</form>

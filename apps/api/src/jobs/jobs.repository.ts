@@ -11,7 +11,7 @@ export class JobsRepository extends Repository<Job> {
     const query = this.createQueryBuilder('job');
 
     if (search) {
-      query.andWhere('job.name LIKE :search)', { search: `%${search}%` });
+      query.andWhere('job.name LIKE :search', { search: `%${search}%` });
     }
 
     return await query.getMany();
