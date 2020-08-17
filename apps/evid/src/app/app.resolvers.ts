@@ -11,26 +11,11 @@ import {EvidNavigationItem} from "../@evid/components/navigation";
 })
 export class InitialDataResolver implements Resolve<any>
 {
-    /**
-     * Constructor
-     *
-     * @param {HttpClient} _httpClient
-     */
+
     constructor(
         private _httpClient: HttpClient
-    )
-    {
-    }
+    ) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Private methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Load navigation data
-     *
-     * @private
-     */
     private _loadNavigation(): Observable<any>
     {
       const navigation: EvidNavigationItem[] = [
@@ -88,12 +73,6 @@ export class InitialDataResolver implements Resolve<any>
         return of({navigation})
     }
 
-
-    /**
-     * Load shortcuts
-     *
-     * @private
-     */
     private _loadShortcuts(): Observable<any>
     {
       const shortcuts: Shortcut[] = [
@@ -173,35 +152,11 @@ export class InitialDataResolver implements Resolve<any>
       return of({shortcuts});
     }
 
-    /**
-     * Load user
-     *
-     * @private
-     */
-    private _loadUser(): Observable<any>
+    private _loadUser(): Observable<Object>
     {
-        // return this._httpClient.get('api/common/user');
-      const user: any = {
-        id    : 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
-        name  : 'Andrew Watkins',
-        email : 'watkins.andrew@company.com',
-        avatar: 'assets/images/avatars/andrew-watkins.jpg',
-        status: 'online'
-      };
-
-      return of({user});
+      return this._httpClient.get('api/profile');
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Resolver
-     *
-     * @param route
-     * @param state
-     */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
     {
         return forkJoin([
@@ -217,7 +172,6 @@ export class InitialDataResolver implements Resolve<any>
             this._loadUser()
         ]).pipe(
             map((data) => {
-
                 return {
                     navigation   : {
                         compact   : data[0].navigation,
@@ -226,7 +180,7 @@ export class InitialDataResolver implements Resolve<any>
                         horizontal: data[0].navigation
                     },
                     notifications: data[1].notifications,
-                    user         : data[2].user
+                    user         : data[2]
                 };
             })
         );
