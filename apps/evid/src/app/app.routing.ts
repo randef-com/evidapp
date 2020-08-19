@@ -92,6 +92,7 @@ export const appRoutes: Route[] = [
       {
         path: 'employee-management', children: [
           {path: 'jobs', loadChildren: () => import('./modules/admin/employee-management/jobs/jobs.module').then(m => m.JobsModule)},
+          {path: 'employees', loadChildren: () => import('./modules/admin/employee-management/employees/employees.module').then(m => m.EmployeesModule)},
 
         ]
       },

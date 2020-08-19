@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { ConsoleModule } from 'nestjs-console';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {typeOrmConfig} from "../../config/typeorm.config";
 import {AuthModule} from "../auth/auth.module";
@@ -12,7 +13,7 @@ import {EmploymentsModule} from "../employments/employments.module";
   imports: [TypeOrmModule.forRoot({
     ...typeOrmConfig,
     entities: getMetadataArgsStorage().tables.map(tbl => tbl.target)
-  }), AuthModule, EmploymentsModule],
+  }), AuthModule, EmploymentsModule, ConsoleModule],
   controllers: [AppController],
   providers: [
     {

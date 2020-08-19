@@ -5,104 +5,62 @@ import { FormControl } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { Contact, Country } from '../contacts.types';
-import { ContactsService } from '../contacts.service';
 import {EvidMediaWatcherService} from "../../../../../../@evid/services/media-watcher";
+import {IEmployee} from "../../../../../../../../../libs/api-interfaces/src/lib/employee.interface";
+import {EmployeesService} from "../employees.service";
 
 @Component({
-    selector       : 'contacts-list',
+    selector       : 'employees-list',
     templateUrl    : './list.component.html',
     styleUrls      : ['./list.component.scss'],
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactsListComponent implements OnInit, OnDestroy
+export class EmployeesListComponent implements OnInit, OnDestroy
 {
-    contacts$: Observable<Contact[]>;
-    contactsCount: number;
-    contactsTableColumns: string[];
-    countries: Country[];
+    employees$: Observable<IEmployee[]>;
+    employeesCount: number;
+    employeesTableColumns: string[];
     drawerMode: 'side' | 'over';
     searchInputControl: FormControl;
-    selectedContact: Contact;
+    selectedEmployee: IEmployee;
 
     @ViewChild('matDrawer', {static: true})
     matDrawer: MatDrawer;
 
-    // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {ActivatedRoute} _activatedRoute
-     * @param {ChangeDetectorRef} _changeDetectorRef
-     * @param {ContactsService} _contactsService
-     * @param {DOCUMENT} _document
-     * @param {Router} _router
-     * @param {EvidMediaWatcherService} _evidMediaWatcherService
-     */
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _contactsService: ContactsService,
+        private _employeesService: EmployeesService,
         @Inject(DOCUMENT) private _document: any,
         private _router: Router,
         private _evidMediaWatcherService: EvidMediaWatcherService
     )
     {
-        // Set the private defaults
         this._unsubscribeAll = new Subject();
-
-        // Set the defaults
-        this.contactsCount = 0;
-        this.contactsTableColumns = ['name', 'email', 'phoneNumber', 'job'];
+        this.employeesCount = 0;
+        this.employeesTableColumns = ['name', 'email', 'roles', 'numberOfEmployments'];
         this.searchInputControl = new FormControl();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void
     {
-        // Get the contacts
-        this.contacts$ = this._contactsService.contacts$;
-        this._contactsService.contacts$
+        this.employees$ = this._employeesService.employees$;
+        this._employeesService.employees$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((contacts: Contact[]) => {
+            .subscribe((employees: IEmployee[]) => {
 
-                // Update the counts
-                this.contactsCount = contacts.length;
-
-                // Mark for check
+                this.employeesCount = employees.length;
                 this._changeDetectorRef.markForCheck();
             });
 
-        // Get the contact
-        this._contactsService.contact$
+        this._employeesService.employee$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((contact: Contact) => {
+            .subscribe((employee: IEmployee) => {
 
-                // Update the selected contact
-                this.selectedContact = contact;
-
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
-
-        // Get the countries
-        this._contactsService.countries$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((countries: Country[]) => {
-
-                // Update the countries
-                this.countries = countries;
-
-                // Mark for check
+                this.selectedEmployee = employee;
                 this._changeDetectorRef.markForCheck();
             });
 
@@ -111,22 +69,19 @@ export class ContactsListComponent implements OnInit, OnDestroy
             .pipe(
                 takeUntil(this._unsubscribeAll),
                 switchMap((query) => {
-
-                    // Search
-                    return this._contactsService.searchContacts(query);
+                  if(query === ""){
+                    return this._employeesService.getEmployees();
+                  }
+                    return this._employeesService.searchEmployees(query);
                 })
             )
             .subscribe();
 
-        // Subscribe to media query change
         this._evidMediaWatcherService.onMediaQueryChange$('(min-width: 1440px)')
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((state) => {
 
-                // Calculate the drawer mode
                 this.drawerMode = state.matches ? 'side' : 'over';
-
-                // Mark for check
                 this._changeDetectorRef.markForCheck();
             });
 
@@ -140,91 +95,48 @@ export class ContactsListComponent implements OnInit, OnDestroy
                 })
             )
             .subscribe(() => {
-                this.createContact();
+                this.createEmployee();
             });
     }
 
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void
     {
-        // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Go to contact
-     *
-     * @param id
-     */
-    goToContact(id: string): void
+    goToEmployee(id: number): void
     {
-        // Get the current activated route
         let route = this._activatedRoute;
         while ( route.firstChild )
         {
             route = route.firstChild;
         }
 
-        // Go to contact
         this._router.navigate(['../', id], {relativeTo: route});
-
-        // Mark for check
         this._changeDetectorRef.markForCheck();
     }
 
-    /**
-     * On backdrop clicked
-     */
     onBackdropClicked(): void
     {
-        // Get the current activated route
         let route = this._activatedRoute;
         while ( route.firstChild )
         {
             route = route.firstChild;
         }
 
-        // Go to the parent route
         this._router.navigate(['../'], {relativeTo: route});
-
-        // Mark for check
         this._changeDetectorRef.markForCheck();
     }
 
-    /**
-     * Create contact
-     */
-    createContact(): void
+    createEmployee(): void
     {
-        // Create the contact
-        this._contactsService.createContact().subscribe((newContact) => {
+        this._employeesService.createEmployee().subscribe((newEmployee) => {
 
-            // Go to new contact
-            this.goToContact(newContact.id);
+            this.goToEmployee(newEmployee.id);
         });
     }
 
-    /**
-     * Get country code
-     *
-     * @param iso
-     */
-    getCountryCode(iso: string): string
-    {
-        if ( !iso )
-        {
-            return '';
-        }
-
-        return this.countries.find((country) => country.iso === iso).code;
-    }
 
     /**
      * Track by function for ngFor loops

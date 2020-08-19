@@ -8,14 +8,13 @@ export class EmploymentsRepository extends Repository<Employment> {
   async getAllFiltered(filterDto: GetEmploymentsFilterDto): Promise<Employment[]> {
     const { search } = filterDto;
     const query = this.createQueryBuilder('employment');
-    query.leftJoinAndSelect("employment.user", "user")
     query.leftJoinAndSelect("employment.job", "job")
     query.leftJoinAndSelect("employment.company", "company")
 
     if (search) {
-      query.andWhere('(user.email LIKE :search ' +
-        'OR user.firstName LIKE :search ' +
-        'OR user.lastName LIKE :search)', {search: `%${search}%`} );
+      query.andWhere('(employment.email LIKE :search ' +
+        'OR employment.firstName LIKE :search ' +
+        'OR employment.lastName LIKE :search)', {search: `%${search}%`} );
     }
 
     return await query.getMany();

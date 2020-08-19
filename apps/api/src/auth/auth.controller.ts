@@ -7,32 +7,26 @@ import {
 import {ApiTags} from '@nestjs/swagger';
 import {AuthService} from './auth.service';
 import {AuthGuard} from '@nestjs/passport';
-import {UsersService} from "../users/users.service";
-import {CreateUserDto} from "../users/dto/create-user.dto";
 import {CredentialsDto} from "./dto/credentials.dto";
+import {EmployeesService} from "../employees/employees.service";
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly usersService: UsersService,
+    private readonly employeesService: EmployeesService
   ) {
-  }
-
-  @Post('register')
-  public async register(@Body(ValidationPipe) createUserDto: CreateUserDto) {
-    return await this.authService.register(createUserDto);
   }
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
   public async login(@Body() login: CredentialsDto) {
-    const user = await this.usersService.findByEmail(login.email);
-    if(!user){
+    const employee = await this.employeesService.findByEmail(login.email);
+    if(!employee){
       throw new UnauthorizedException();
     }
-    return await this.authService.login(user);
+    return await this.authService.login(employee);
 
   }
 }

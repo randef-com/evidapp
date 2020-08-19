@@ -5,7 +5,7 @@ import {
 import {ApiTags} from '@nestjs/swagger';
 import {AuthGuard} from '@nestjs/passport';
 import {GetUser} from "./decorators/get-user.decorator";
-import {User} from "../users/user.entity";
+import {Employee} from "../employees/employee.entity";
 
 @ApiTags('profile')
 @Controller('profile')
@@ -13,7 +13,7 @@ import {User} from "../users/user.entity";
 export class ProfileController {
 
   @Get()
-  public async profile(@GetUser() user: User): Promise<User> {
+  public async profile(@GetUser() user: Employee): Promise<Employee> {
     return user;
   }
 }

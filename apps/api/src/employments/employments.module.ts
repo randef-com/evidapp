@@ -4,15 +4,15 @@ import {EmploymentsController} from "./employments.controller";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {EmploymentsRepository} from "./employments.repository";
 import {CompaniesModule} from "../companies/companies.module";
-import {UsersModule} from "../users/users.module";
 import {JobsModule} from "../jobs/jobs.module";
 import {HolidaysModule} from "../holidays/holidays.module";
+import {EmployeesModule} from "../employees/employees.module";
 
 @Module({
   imports : [
     TypeOrmModule.forFeature([EmploymentsRepository]),
     CompaniesModule,
-    UsersModule,
+    EmployeesModule,
     JobsModule,
     HolidaysModule
   ],

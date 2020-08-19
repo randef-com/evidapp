@@ -1,7 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
-import {User} from "../users/user.entity";
 import {Job} from "../jobs/job.entity";
 import {Company} from "../companies/company.entity";
+import {Employee} from "../employees/employee.entity";
 
 @Entity()
 export class Employment {
@@ -23,8 +23,8 @@ export class Employment {
   @Column("time")
   breakEnd: Date;
 
-  @ManyToOne(type => User, user => user.employments, { eager: true })
-  user: User;
+  @ManyToOne(type => Employee, employee => employee.employments, { eager: false })
+  employee: Employee;
 
   @ManyToOne(type => Job, job => job.employments, { eager: true })
   job: Job;

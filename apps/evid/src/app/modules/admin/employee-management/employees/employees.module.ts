@@ -17,22 +17,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import * as moment from 'moment';
-import { contactsRoutes } from './contacts.routing';
-import { ContactsComponent } from './contacts.component';
-import { ContactsDetailsComponent } from './details/details.component';
-import { ContactsListComponent } from './list/list.component';
 import {EvidAutogrowModule} from "../../../../../@evid/directives/autogrow";
 import {EvidFindByKeyPipeModule} from "../../../../../@evid/pipes/find-by-key";
 import {SharedModule} from "../../../../shared/shared.module";
+import {EmployeesComponent} from "./employees.component";
+import {EmployeesListComponent} from "./list/list.component";
+import {EmployeesDetailsComponent} from "./details/details.component";
+import {employeesRoutes} from "./employees.routing";
 
 @NgModule({
     declarations: [
-        ContactsComponent,
-        ContactsListComponent,
-        ContactsDetailsComponent
+        EmployeesComponent,
+        EmployeesListComponent,
+        EmployeesDetailsComponent,
     ],
     imports     : [
-        RouterModule.forChild(contactsRoutes),
+        RouterModule.forChild(employeesRoutes),
         MatButtonModule,
         MatCheckboxModule,
         MatDatepickerModule,
@@ -70,6 +70,6 @@ import {SharedModule} from "../../../../shared/shared.module";
         }
     ]
 })
-export class ContactsModule
+export class EmployeesModule
 {
 }

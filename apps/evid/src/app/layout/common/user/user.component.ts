@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {User} from "./user.types";
 import {UserService} from "./user.service";
+import {IUser} from "../../../../../../../libs/api-interfaces/src/lib/user.interface";
 
 @Component({
     selector       : 'user',
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit, OnDestroy
 
     // Private
     private _unsubscribeAll: Subject<any>;
-    private _user: User;
+    private _user: IUser;
 
     /**
      * Constructor
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit, OnDestroy
      * @param value
      */
     @Input()
-    set user(value: User)
+    set user(value: IUser)
     {
       console.log(value);
         // Save the user
@@ -62,7 +62,7 @@ export class UserComponent implements OnInit, OnDestroy
         this._userService.user = value;
     }
 
-    get user(): User
+    get user(): IUser
     {
         return this._user;
     }
@@ -79,7 +79,7 @@ export class UserComponent implements OnInit, OnDestroy
         // Subscribe to user changes
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((user: User) => {
+            .subscribe((user: IUser) => {
                 this._user = user;
             });
     }

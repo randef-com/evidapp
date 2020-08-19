@@ -45,7 +45,15 @@ export class InitialDataResolver implements Resolve<any>
               type : 'basic',
               icon : 'heroicons_outline:briefcase',
               link : '/employee-management/jobs'
+            },
+            {
+              id   : 'employee-management.employees',
+              title: 'Zaměstnanci',
+              type : 'basic',
+              icon : 'heroicons_outline:user',
+              link : '/employee-management/employees'
             }
+
           ]
         },
         {

@@ -1,6 +1,6 @@
 @import 'apps/evid/src/@evid/styles/evid';
 
-contacts-list {
+employees-list {
     display: flex;
     flex: 1 1 auto;
 
@@ -49,7 +49,7 @@ contacts-list {
                         }
                     }
 
-                    .contacts-count {
+                    .employees-count {
                         margin-left: 2px;
                         font-weight: 500;
                     }
@@ -80,7 +80,7 @@ contacts-list {
                             }
                         }
 
-                        .add-contact {
+                        .add-employee {
                             flex: 1 0 auto;
                             padding: 0 20px 0 16px;
 
@@ -92,7 +92,7 @@ contacts-list {
                     }
                 }
 
-                .contacts-list {
+                .employees-list {
 
                     table {
                         width: 100%;
@@ -130,7 +130,7 @@ contacts-list {
                             }
                         }
 
-                        tr.contact-row {
+                        tr.employee-row {
                             height: 64px;
                             cursor: pointer;
 
@@ -233,7 +233,7 @@ contacts-list {
                         }
                     }
 
-                    .no-contacts {
+                    .no-employees {
                         padding: 64px;
                         font-size: 24px;
                         text-align: center;
@@ -258,7 +258,7 @@ contacts-list {
     $primary: map-get($theme, primary);
     $is-dark: map-get($theme, is-dark);
 
-    contacts-list {
+    employees-list {
 
         .mat-drawer-container {
             @if (not $is-dark) {
@@ -271,12 +271,12 @@ contacts-list {
 
                     .header {
 
-                        .contacts-count {
+                        .employees-count {
                             color: map-get($foreground, secondary-text);
                         }
                     }
 
-                    .contacts-list {
+                    .employees-list {
 
                         table {
                             background: transparent;
@@ -289,7 +289,7 @@ contacts-list {
                                 }
                             }
 
-                            tr.contact-row {
+                            tr.employee-row {
 
                                 &:hover,
                                 &.selected {

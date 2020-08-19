@@ -9,7 +9,7 @@ export class Job {
   @Column()
   name: string;
 
-  @OneToMany(type => Employment, employment => employment.user, { eager: false })
+  @OneToMany(type => Employment, employment => employment.employee, { eager: false })
   employments: Employment[];
 
 }

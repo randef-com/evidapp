@@ -1,17 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector       : 'contacts',
-    templateUrl    : './contacts.component.html',
-    styleUrls      : ['./contacts.component.scss'],
+    selector       : 'employees',
+    templateUrl    : './employees.component.html',
+    styleUrls      : ['./employees.component.scss'],
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactsComponent
+export class EmployeesComponent
 {
-    /**
-     * Constructor
-     */
     constructor()
     {
     }

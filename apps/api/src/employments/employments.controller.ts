@@ -45,7 +45,7 @@ export class EmploymentsController {
 
   @Post()
   @Roles('admin')
-  createEmployment(@Body() dto: CreateEmploymentDto): Promise<Employment> {
+  createEmployment(@Body(ValidationPipe) dto: CreateEmploymentDto): Promise<Employment> {
     return this.service.create(dto);
   }
 

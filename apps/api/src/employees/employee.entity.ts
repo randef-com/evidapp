@@ -10,7 +10,7 @@ import {Employment} from "../employments/employment.entity";
 
 @Entity()
 @Unique(['email'])
-export class User {
+export class Employee {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,10 +27,10 @@ export class User {
   @Exclude()
   password: string;
 
-  @Column("simple-array", {default: 'user'})
+  @Column("simple-array", {default: 'employee'})
   roles: string[];
 
-  @OneToMany(type => Employment, employment => employment.user, { eager: false })
+  @OneToMany(type => Employment, employment => employment.employee, { eager: true })
   employments: Employment[];
 
   @BeforeInsert()

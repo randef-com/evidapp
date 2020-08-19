@@ -1,6 +1,6 @@
 import { IsOptional, IsNotEmpty } from 'class-validator';
 
-export class GetUsersFilterDto {
+export class GetEmployeesFilterDto {
 
   @IsOptional()
   @IsNotEmpty()

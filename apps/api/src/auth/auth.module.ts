@@ -5,12 +5,12 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
-import { UsersModule } from "../users/users.module";
 import {ProfileController} from "./profile.controller";
+import {EmployeesModule} from "../employees/employees.module";
 
 @Module({
   imports: [
-    UsersModule,
+    EmployeesModule,
     PassportModule,
     JwtModule.register({
       secret: 'Codebrains',

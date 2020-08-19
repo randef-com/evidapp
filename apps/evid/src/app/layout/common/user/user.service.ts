@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { User } from './user.types';
+import {IUser} from "../../../../../../../libs/api-interfaces/src/lib/user.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,7 @@ import { User } from './user.types';
 export class UserService
 {
     // Observables
-    private _user: BehaviorSubject<User | null>;
+    private _user: BehaviorSubject<IUser | null>;
 
     /**
      * Constructor
@@ -34,13 +34,13 @@ export class UserService
      *
      * @param value
      */
-    set user(value: User)
+    set user(value: IUser)
     {
         // Store the value
         this._user.next(value);
     }
 
-    get user$(): Observable<User>
+    get user$(): Observable<IUser>
     {
         return this._user.asObservable();
     }
@@ -54,7 +54,7 @@ export class UserService
      *
      * @param user
      */
-    update(user: User): Observable<any>
+    update(user: IUser): Observable<any>
     {
         return this._httpClient.patch('api/common/user', {user}).pipe(
             tap(() => {

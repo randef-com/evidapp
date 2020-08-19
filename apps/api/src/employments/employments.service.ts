@@ -6,16 +6,16 @@ import {EmploymentsRepository} from "./employments.repository";
 import {GetEmploymentsFilterDto} from "./dto/get-employments-filter.dto";
 import {Employment} from "./employment.entity";
 import {CreateEmploymentDto} from "./dto/create-employment.dto";
-import {UsersService} from "../users/users.service";
 import {CompaniesService} from "../companies/companies.service";
 import {JobsService} from "../jobs/jobs.service";
+import {EmployeesService} from "../employees/employees.service";
 
 @Injectable()
 export class EmploymentsService {
   constructor(
     @InjectRepository(EmploymentsRepository)
     private readonly repository: EmploymentsRepository,
-    private readonly usersService: UsersService,
+    private readonly employeesService: EmployeesService,
     private readonly companiesService: CompaniesService,
     private readonly jobsService: JobsService
   ) {
@@ -38,7 +38,7 @@ export class EmploymentsService {
 
   public async create(dto: CreateEmploymentDto): Promise<Employment> {
 
-    const user = await this.usersService.findById(dto.userId);
+    const user = await this.employeesService.findById(dto.userId);
     const company = await this.companiesService.findById(dto.companyId);
     const job = await this.jobsService.findById(dto.jobId);
 

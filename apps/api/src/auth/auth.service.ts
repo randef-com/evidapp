@@ -1,29 +1,22 @@
 import {Injectable} from '@nestjs/common';
-import {UsersService} from "../users/users.service";
-import {CreateUserDto} from "../users/dto/create-user.dto";
-import {IRegistrationStatus} from "../../../../libs/api-interfaces/src/lib/registration-status.interface";
-import {User} from "../users/user.entity";
 import {JwtService} from '@nestjs/jwt';
 import {IToken} from "../../../../libs/api-interfaces/src/lib/token.interface";
-
+import {EmployeesService} from "../employees/employees.service";
+import {Employee} from "../employees/employee.entity";
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService,
+  constructor(private employeesService: EmployeesService,
               private jwtService: JwtService) {
   }
 
-  async register(user: CreateUserDto): Promise<void> {
-    await this.usersService.register(user);
-  }
-
-  async login(user: User): Promise<IToken> {
+  async login(employee: Employee): Promise<IToken> {
     const payload = {
-      sub: user.id,
-      email: user.email,
-      firstname: user.firstName,
-      lastname: user.lastName,
-      roles: user.roles
+      sub: employee.id,
+      email: employee.email,
+      firstname: employee.firstName,
+      lastname: employee.lastName,
+      roles: employee.roles
     };
 
     return {
@@ -32,9 +25,9 @@ export class AuthService {
   }
 
   async validateUser(email: string, pass: string): Promise<any> {
-    const user = await this.usersService.findByEmail(email);
-    if (user && await user.comparePassword(pass)) {
-      const {password, ...result} = user;
+    const employee = await this.employeesService.findByEmail(email);
+    if (employee && await employee.comparePassword(pass)) {
+      const {password, ...result} = employee;
       return result;
     }
     return null;

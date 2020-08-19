@@ -1,6 +1,6 @@
 @import 'apps/evid/src/@evid/styles/evid';
 
-contacts-details {
+employees-details {
     display: flex;
     flex: 1 1 auto;
 
@@ -431,7 +431,7 @@ contacts-details {
                         min-height: 16px;
                         max-height: 16px;
                         margin-right: 12px;
-                        background: url('/assets/images/apps/contacts/flags.png') no-repeat 0 0;
+                        background: url('/assets/images/apps/employees/flags.png') no-repeat 0 0;
                         background-size: 24px 3876px;
                         overflow: hidden;
                     }
@@ -484,7 +484,7 @@ contacts-details {
                                     display: flex;
                                     width: 24px;
                                     height: 16px;
-                                    background: url('/assets/images/apps/contacts/flags.png') no-repeat 0 0;
+                                    background: url('/assets/images/apps/employees/flags.png') no-repeat 0 0;
                                     background-size: 24px 3876px;
                                     overflow: hidden;
                                 }
@@ -611,7 +611,7 @@ contacts-details {
     }
 }
 
-.contacts-details-tags-panel {
+.employees-details-tags-panel {
     min-width: 200px;
     max-width: 200px;
     margin-top: 4px;
@@ -728,7 +728,7 @@ contacts-details {
     }
 }
 
-.contacts-details-birthday-panel {
+.employees-details-birthday-panel {
     display: flex;
     flex-direction: column;
     min-width: 320px;
@@ -752,7 +752,7 @@ contacts-details {
     }
 }
 
-.contacts-details-country-code-selector-panel {
+.employees-details-country-code-selector-panel {
 
     .mat-option {
 
@@ -764,7 +764,7 @@ contacts-details {
                 display: flex;
                 width: 24px;
                 height: 16px;
-                background: url('/assets/images/apps/contacts/flags.png') no-repeat 0 0;
+                background: url('/assets/images/apps/employees/flags.png') no-repeat 0 0;
                 background-size: 24px 3876px;
                 margin-right: 12px;
                 overflow: hidden;
@@ -794,7 +794,7 @@ contacts-details {
     $primary: map-get($theme, primary);
     $is-dark: map-get($theme, is-dark);
 
-    contacts-details {
+    employees-details {
 
         form {
 
@@ -962,7 +962,7 @@ contacts-details {
         }
     }
 
-    .contacts-details-tags-panel {
+    .employees-details-tags-panel {
         background: map-get($background, card);
         border-color: map-get($foreground, divider);
 
@@ -982,12 +982,12 @@ contacts-details {
         }
     }
 
-    .contacts-details-birthday-panel {
+    .employees-details-birthday-panel {
         background: map-get($background, card);
         border-color: map-get($foreground, divider);
     }
 
-    .contacts-details-country-code-selector-panel {
+    .employees-details-country-code-selector-panel {
 
         .mat-option {
 
