@@ -88,14 +88,14 @@
 
             <div class="no-avatar"
                  *ngIf="!employee.avatar">
-                {{employee.firstName.charAt(0)}}
+                {{employee.firstName.charAt(0)}}{{employee.lastName.charAt(0)}}
             </div>
 
         </div>
 
         <div class="view"
              *ngIf="employee.firstName && !editMode">
-            <div class="name">{{employee.firstName}}</div>
+            <div class="name">{{employee.firstName}} {{employee.lastName}}</div>
         </div>
 
         <div class="edit"

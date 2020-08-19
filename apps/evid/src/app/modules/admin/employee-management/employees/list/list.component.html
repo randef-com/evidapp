@@ -89,7 +89,7 @@
                                             <img *ngIf="employee.avatar"
                                                  [src]="employee.avatar">
                                             <span *ngIf="!employee.avatar">
-                                                {{employee.firstName.charAt(0)}}
+                                                {{employee.firstName.charAt(0)}}{{employee.lastName.charAt(0)}}
                                             </span>
                                         </span>
                                         <span class="name">{{employee.firstName}} {{employee.lastName}}</span>
