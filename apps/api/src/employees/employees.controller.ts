@@ -4,8 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe, Post, Query,
-  UseGuards, UsePipes,
-  ValidationPipe
+  UseGuards
 } from '@nestjs/common';
 import {ApiTags} from "@nestjs/swagger";
 import {AuthGuard} from "@nestjs/passport";
@@ -19,9 +18,9 @@ import {CreateEmployeeDto} from "./dto/create-employee.dto";
 
 @ApiTags('employees')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@UsePipes(ValidationPipe)
 @Controller('employees')
 export class EmployeesController {
+
   constructor(
     private readonly employeesService: EmployeesService,
   ) {}

@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {EmployeesService} from "./employees.service";
-import {IEmployee} from "../../../../../../../../libs/api-interfaces/src/lib/employee.interface";
+import {IEmployee} from "@evidapp/api-interfaces";
 
 @Injectable({
     providedIn: 'root'

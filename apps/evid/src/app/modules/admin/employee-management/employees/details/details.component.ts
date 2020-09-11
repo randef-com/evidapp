@@ -80,8 +80,7 @@ export class EmployeesDetailsComponent implements OnInit, OnDestroy
 
                 this.employee = employee;
 
-                (this.employeeForm.get('emails') as FormArray).clear();
-                (this.employeeForm.get('phoneNumbers') as FormArray).clear();
+                (this.employeeForm.get('employments') as FormArray).clear();
 
                 console.log(employee);
                 console.log(this.employeeForm)
@@ -112,7 +111,7 @@ export class EmployeesDetailsComponent implements OnInit, OnDestroy
                 }
 
                 employmentFormGroups.forEach((employmentFormGroup) => {
-                    (this.employeeForm.get('emails') as FormArray).push(employmentFormGroup);
+                    (this.employeeForm.get('employments') as FormArray).push(employmentFormGroup);
                 });
 
 

@@ -22,7 +22,6 @@ import {AuthGuard} from "@nestjs/passport";
 
 @ApiTags('companies')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@UsePipes(ValidationPipe)
 @Controller('companies')
 export class CompaniesController {
   constructor(

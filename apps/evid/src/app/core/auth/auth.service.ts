@@ -34,7 +34,7 @@ export class AuthService
         {
             return throwError('User is already logged in.');
         }
-
+        console.log(credentials)
         return this._httpClient.post('api/auth/login', credentials).pipe(
             switchMap((response: any) => {
 

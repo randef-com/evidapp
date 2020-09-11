@@ -8,8 +8,7 @@ import {
   Post,
   Put,
   Query,
-  UseGuards,
-  UsePipes, ValidationPipe
+  UseGuards
 } from '@nestjs/common';
 import {Roles} from "../auth/decorators/roles.decorator";
 
@@ -24,7 +23,6 @@ import {RolesGuard} from "../auth/guards/roles.guard";
 
 @ApiTags('employments')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
-@UsePipes(ValidationPipe)
 @Controller('employments')
 export class EmploymentsController {
   constructor(
@@ -45,7 +43,7 @@ export class EmploymentsController {
 
   @Post()
   @Roles('admin')
-  createEmployment(@Body(ValidationPipe) dto: CreateEmploymentDto): Promise<Employment> {
+  createEmployment(@Body() dto: CreateEmploymentDto): Promise<Employment> {
     return this.service.create(dto);
   }
 

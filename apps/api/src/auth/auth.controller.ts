@@ -2,7 +2,7 @@ import {
   Controller,
   UseGuards,
   Post,
-  Body, ValidationPipe, UnauthorizedException,
+  Body, UnauthorizedException,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 import {AuthService} from './auth.service';

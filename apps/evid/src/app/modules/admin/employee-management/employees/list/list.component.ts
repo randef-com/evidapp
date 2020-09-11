@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { fromEvent, Observable, Subject } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import {debounceTime, filter, switchMap, takeUntil, throttleTime} from 'rxjs/operators';
 import {EvidMediaWatcherService} from "../../../../../../@evid/services/media-watcher";
 import {IEmployee} from "../../../../../../../../../libs/api-interfaces/src/lib/employee.interface";
 import {EmployeesService} from "../employees.service";
@@ -67,6 +67,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy
         // Subscribe to search input field value changes
         this.searchInputControl.valueChanges
             .pipe(
+                debounceTime(300),
                 takeUntil(this._unsubscribeAll),
                 switchMap((query) => {
                   if(query === ""){

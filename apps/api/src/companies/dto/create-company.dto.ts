@@ -5,7 +5,9 @@ export class CreateCompanyDto {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({
+    description: "Name of the company",
+  })
   readonly name: string;
 
 }

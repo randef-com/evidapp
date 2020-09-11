@@ -67,14 +67,14 @@ export class InitialDataResolver implements Resolve<any>
               title   : 'Výkaz zaměstnance',
               type    : 'basic',
               icon    : 'heroicons_outline:briefcase',
-              link    : '/apps/calendar'
+              link    : '/employee-management/calendar'
             },
             {
               id      : 'applications.variable-export',
               title   : 'Výkaz směn',
               type    : 'basic',
               icon    : 'heroicons_outline:calendar',
-              link    : '/apps/calendar'
+              link    : '/employee-management/calendar'
             }
           ]
         },];

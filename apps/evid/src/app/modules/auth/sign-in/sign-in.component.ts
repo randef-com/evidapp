@@ -32,34 +32,18 @@ export class AuthSignInComponent implements OnInit
         private _router: Router
     )
     {
-        // Set the defaults
         this.message = null;
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void
     {
-        // Create the form
         this.signInForm = this._formBuilder.group({
             email     : [''],
-            password  : [''],
-            rememberMe: ['']
+            password  : ['']
         });
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Sign in
-     */
     signIn(): void
     {
         // Disable the form

@@ -1,0 +1,30 @@
+<h1 class="title">Calendar</h1>
+
+<!-- Calendars -->
+<div class="calendars">
+
+    <div class="header">
+        <span class="title">Legenda</span>
+
+    </div>
+
+    <div class="calendar"
+         *ngFor="let calendar of calendars">
+
+        <div class="toggle"
+             (click)="toggleCalendarVisibility(calendar)">
+
+            <mat-icon class="visibility"
+                      [ngClass]="'text-' + calendar.color"
+                      [svgIcon]="calendar.visible ? 'check_box' : 'check_box_outline_blank'"></mat-icon>
+
+            <span class="title">
+                {{calendar.title}}
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+

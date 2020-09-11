@@ -44,6 +44,7 @@
                                [formControlName]="'password'"
                                #passwordField>
                         <button mat-icon-button
+                                type="button"
                                 (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
                                 tabindex="-1"
                                 matSuffix>
@@ -56,12 +57,6 @@
 
                     <!-- Field footer -->
                     <div class="field-footer">
-                        <div class="remember-me">
-                            <mat-checkbox [color]="'primary'"
-                                          [formControlName]="'rememberMe'">
-                                Pamatovat si mě
-                            </mat-checkbox>
-                        </div>
                         <a class="link"
                            [routerLink]="['/forgot-password']">Zapomněli jste heslo?</a>
                     </div>
@@ -69,7 +64,6 @@
                     <!-- Submit button -->
                     <button class="submit-button evid-mat-button-large"
                             mat-flat-button
-                            type="button"
                             [color]="'primary'"
                             [disabled]="signInForm.disabled"
                             (click)="signIn()">
