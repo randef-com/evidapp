@@ -69,7 +69,7 @@
     "apexcharts": "^3.19.3",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "commander": "^6.0.0",
     "crypto-js": "^3.3.0",
     "highlight.js": "^10.1.1",
